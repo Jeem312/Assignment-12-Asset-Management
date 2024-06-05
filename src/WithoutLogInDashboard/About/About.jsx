@@ -22,7 +22,7 @@ const About = () => {
           <img src="https://i.ibb.co/SvDmBC2/austin-distel-Dfj-JMVhw-H-8-unsplash.jpg" alt="" className='rounded-lg' />
         </div>
       </div>
-      <div className='flex my-4 gap-4 '>
+      <div className='flex flex-col md:flex-row my-4 gap-4 '>
         <div className='p-8 flex-1 border border-green-400 rounded-lg'>
 
           <BsLaptop className='h-8 w-8' />
@@ -41,7 +41,7 @@ const About = () => {
         </div>
        
       </div>
-      <div className='flex my-4 gap-4'>
+      <div className='flex flex-col md:flex-row my-4 gap-4'>
         <div className='p-8 flex-1 border border-green-400 rounded-lg'>
 
           <FaGear className='h-8 w-8' />
