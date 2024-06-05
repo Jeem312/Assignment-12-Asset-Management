@@ -46,7 +46,7 @@ const Banner = () => {
     <div className='text-5xl font-bold text-white my-4'>
       Welcome To PrimeFunds
     </div>
-    <Link to='/joinAsHr'>
+    <Link to='/joinAsEmploy'>
    
       <button className='btn bg-green-400 text-white border-green-400'>Join As Employee<FaArrowRightLong /></button> 
     </Link>
