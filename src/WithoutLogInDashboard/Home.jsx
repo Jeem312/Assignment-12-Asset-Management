@@ -7,25 +7,25 @@ import About from './About/About';
 import Package from './Package/Package';
 
 
-const Home = () => {
 
+const Home = () => {
+  
   return (
     <div>
       <Helmet>
         <title>PrimeFunds || Home</title>
       </Helmet>
-      <div className='container mx-auto my-24'>
-        <Banner></Banner>
-      </div>
-      <div className='container mx-auto my-24'>
-        <Package></Package>
-      </div>
-      <div className='container mx-auto my-24'>
-        <About></About>
-      </div>
     
-
+         <div className='container mx-auto my-24'>
+      <Banner></Banner>
     </div>
+    <div className='container mx-auto my-24'>
+      <Package></Package>
+    </div>
+    <div className='container mx-auto my-24'>
+      <About></About>
+    </div>
+      </div>
 
   );
 };

@@ -1,22 +1,63 @@
 import React, { useContext } from 'react';
 import { Link, NavLink, useNavigation } from 'react-router-dom';
+import { AuthContext } from '../Provider/Provider';
+import useHr from '../Hooks/useHr';
+import useEmplyee from '../Hooks/useEmplyee';
 
 
 
 const Navbar = () => {
 
    
+  const {user,logOut} = useContext(AuthContext);
+   const [isHr,isHrLoading] =useHr();
+   const [isEmployee,isEmployeeLoading]=useEmplyee();
+   const handleLogOut = ()=>{
+    logOut()
+    .then(()=>{})
+    .catch(error => console.log(error))
+   }
+
+     const links = <>
+   
+    
+   {
+    !user && 
+     <div className='flex'>
+      <li className="font-bold text-green-400 "> <NavLink to="/">Home</NavLink></li>
+       <li className="font-bold text-green-400"> <NavLink to="/joinAsEmploy">Join As Employee</NavLink> </li>
+    <li className="font-bold text-green-400"> <NavLink to="/joinAsHr">Join As HR Manager</NavLink> </li> 
+     </div>
+   
+   }
+   {
+    user && isEmployee &&
+     <div className='flex'>
+     <li className="font-bold text-green-400 "> <NavLink to="/employeeHome">Home</NavLink></li>
+    <li className="font-bold text-green-400"> <NavLink to="/dashboard">My Assets</NavLink> </li> 
+    <li className="font-bold text-green-400"> <NavLink to="/dashboard">My Team</NavLink> </li> 
+    <li className="font-bold text-green-400"> <NavLink to="/dashboard">Request for an Asset</NavLink> </li> 
+    <li className="font-bold text-green-400"> <NavLink to="/profile">Profile</NavLink> </li>
+     </div>
+   
+   }
+   {
+    user && isHr &&
+     <div className='flex'>
+       <li className="font-bold text-green-400 "> <NavLink to="/hrHome">Home</NavLink></li>
+    <li className="font-bold text-green-400"> <NavLink to="/dashboard">All Requests</NavLink> </li> 
+    <li className="font-bold text-green-400"> <NavLink to="/dashboard">Asset List</NavLink> </li> 
+    <li className="font-bold text-green-400"> <NavLink to="/dashboard">Add an Asset</NavLink> </li> 
+    <li className="font-bold text-green-400"> <NavLink to="/dashboard">Add an Employee</NavLink> </li> 
+    <li className="font-bold text-green-400"> <NavLink to="/dashboard">My Employee List</NavLink> </li> 
+    <li className="font-bold text-green-400"> <NavLink to="/profile">Profile</NavLink> </li> 
+     </div>
+   
+   }
   
-   
-   
-
-
-    const links = <>
-    <li className="font-bold text-green-400 "> <NavLink to="/">Home</NavLink></li>
-    <li className="font-bold text-green-400"> <NavLink to="/joinAsEmploy">Join As Employ</NavLink> </li>
-    <li className="font-bold text-green-400"> <NavLink to="/joinAsHr">Join As HR Manager</NavLink> </li>
-    <li className="font-bold text-green-400"> <NavLink to="/login">LogIn</NavLink> </li>
+ 
   </>
+  
     return (
         <div className='container mx-auto mb-10  '>
         <div className="navbar rounded-md">
@@ -38,12 +79,47 @@ const Navbar = () => {
   PrimeFunds
 </div></Link>
 </div>
-<div className=" hidden lg:flex navbar-end">
+<div className=" hidden lg:flex navbar-center">
 <ul className="menu menu-horizontal px-1 text-green-400 ">
  {links}
 </ul>
 </div>
+<div className="navbar-end gap-2">
 
+{
+                user ?  <div className="dropdown dropdown-end inline-flex">
+                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                <div className="w-10  rounded-full">
+                <div>
+                  <img src={user?.photoURL || "https://i.postimg.cc/q7V3Q9ZV/user-3177440.png" } />
+                  </div>
+                </div>
+                <ul tabIndex={0} className="mt-20 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                  <li>
+                    <a className="justify-between">
+                    {user?.displayName||'user name not found'}
+
+                     
+                    </a>
+                  </li>
+  
+                </ul>
+                </div>
+                <div className='mt-2 bg-green-400 text-white btn '>
+                             <button
+                             onClick={handleLogOut}
+                                className=" btn-sm   ">Logout</button>
+
+                </div>
+              </div> :
+                <div>
+               
+                <Link to='/login'> <button className=' btn bg-green-400 text-white'>LogIn</button></Link>
+                </div>
+               
+                   
+            }
+</div>
 </div>
     </div>
    

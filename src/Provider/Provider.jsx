@@ -1,6 +1,7 @@
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import React, { createContext, useEffect, useState } from 'react';
 import auth from '../Firebase/Firebase.config';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 
 
@@ -10,7 +11,7 @@ export const AuthContext = createContext(null);
 const Provider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-
+   const axiosPublic = useAxiosPublic();
 
 
     //  SocialProviders
@@ -54,18 +55,33 @@ const Provider = ({children}) => {
        
 
       }
-      useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, currentUser => {
-            setUser(currentUser);
-            // console.log('current user', currentUser);
-            setLoading(false);
-          
-            
-        });
-        return () => {
-            return unsubscribe();
-        }
-    }, [])
+      useEffect(()=>{
+        const unsubscribe = onAuthStateChanged(auth,(currentUser)=>{
+             setUser(currentUser);
+ 
+             console.log('current user',currentUser);
+           
+ 
+             if(currentUser){
+                 const userinfo = {email:currentUser.email};
+                 console.log(userinfo);
+                 axiosPublic.post('/jwt',userinfo)
+                 .then(res=>{
+                     if(res.data.token){
+                         localStorage.setItem('Access-token',res.data.token);
+                         setLoading(false) ;
+                     }
+                     else{
+                         localStorage.removeItem('Access-Token');
+                         setLoading(false)
+                     }
+                 })
+             }
+         })
+         return()=>{
+             return unsubscribe();
+         }
+     },[])
        
     const allInfo = {
       

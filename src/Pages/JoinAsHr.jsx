@@ -11,11 +11,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "../Provider/Provider";
 
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+
 
 
 const JoinAsHr = () => {
     const {  createUser,updateUserProfile,googleLogin} =useContext(AuthContext);
-
+ const axiosPublic = useAxiosPublic()
     const navigate = useNavigate();
       const from = "/";
     
@@ -33,7 +35,11 @@ const JoinAsHr = () => {
               toast.error("Password must have at least 1 uppercase letter, 1 lowercase letter, 1 special character, 1 numeric character, and be at least 6 characters long");
               return;
           }
-            
+          const info ={
+            email: data.email,
+            Name:data.Name,
+            role:'Hr'
+        }
             
             createUser(email,password)
             .then(result=>{
@@ -41,7 +47,8 @@ const JoinAsHr = () => {
     
               if (result.user) {
                 toast('Register As Hr Manager Successfully');
-               
+                axiosPublic.post('/user',info)
+                .then(res=>{console.log(res.data)})
                 updateUserProfile(Name, image)
                 navigate(from)
               
@@ -56,7 +63,14 @@ const JoinAsHr = () => {
             socialProvider()
             .then((result) => {
               if (result.user) {
+                const info ={
+                  email: result.user.email,
+                  Name:result.user.displayName,
+                  role:'Hr'
+              }
                 toast('LogIn Successfully');
+                axiosPublic.post('/user',info)
+                .then(res=>{console.log(res.data)})
                 navigate(from);
               }
           })    

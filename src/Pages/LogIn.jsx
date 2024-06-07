@@ -8,6 +8,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from "../Provider/Provider";
 import toast from "react-hot-toast";
 import { FaRegCircleUser, FaUser } from "react-icons/fa6";
+import Swal from "sweetalert2";
 
 
 
@@ -52,7 +53,13 @@ const LogIn = () => {
             socialProvider()
             .then((result) => {
               if (result.user) {
-                toast('LogIn Successfully');
+                Swal.fire({
+                 
+                  icon: "success",
+                  title: "Your work has been saved",
+                  showConfirmButton: false,
+                  timer: 1500
+                });
                 navigate(from,);
               }
           })
