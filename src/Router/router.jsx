@@ -8,6 +8,7 @@ import LogIn from "../Pages/LogIn.jsx";
 import EmployeeHome from "../EmployeeDashboard/EmployeeHome.jsx";
 import HrHome from "../HrDashboard/HrHome/HrHome.jsx";
 import AddAsset from '../HrDashboard/AddAsset.jsx'
+import Payment from "../Pages/Payment/Payment.jsx";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
         {
             path:'/addAsset',
             element: <AddAsset></AddAsset>,
+        },
+        {
+            path:'/payment/:id',
+            element: <Payment></Payment>,
         }
       ]
     },
