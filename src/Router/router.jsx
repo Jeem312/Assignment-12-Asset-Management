@@ -5,6 +5,9 @@ import Home from '../WithoutLogInDashboard/Home.jsx'
 import JoinAsEmploy from "../Pages/JoinAsEmploy.jsx";
 import JoinAsHr from "../Pages/JoinAsHr.jsx";
 import LogIn from "../Pages/LogIn.jsx";
+import EmployeeHome from "../EmployeeDashboard/EmployeeHome.jsx";
+import HrHome from "../HrDashboard/HrHome/HrHome.jsx";
+import AddAsset from '../HrDashboard/AddAsset.jsx'
 const router = createBrowserRouter([
     {
       path: "/",
@@ -26,6 +29,18 @@ const router = createBrowserRouter([
         {
             path:'/login',
             element: <LogIn></LogIn>,
+        },
+        {
+            path:'/employeeHome',
+            element: <EmployeeHome></EmployeeHome>
+        },
+        {
+            path:'/hrHome',
+            element: <HrHome></HrHome>,
+        },
+        {
+            path:'/addAsset',
+            element: <AddAsset></AddAsset>,
         }
       ]
     },

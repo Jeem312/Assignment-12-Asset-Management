@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, NavLink, useNavigation } from 'react-router-dom';
+import { Link, NavLink, useNavigate, useNavigation } from 'react-router-dom';
 import { AuthContext } from '../Provider/Provider';
 import useHr from '../Hooks/useHr';
 import useEmplyee from '../Hooks/useEmplyee';
@@ -8,13 +8,16 @@ import useEmplyee from '../Hooks/useEmplyee';
 
 const Navbar = () => {
 
-   
+  const navigate = useNavigate();
   const {user,logOut} = useContext(AuthContext);
    const [isHr,isHrLoading] =useHr();
    const [isEmployee,isEmployeeLoading]=useEmplyee();
    const handleLogOut = ()=>{
     logOut()
-    .then(()=>{})
+    .then(()=>{
+      navigate('/')
+
+    })
     .catch(error => console.log(error))
    }
 
@@ -47,7 +50,7 @@ const Navbar = () => {
        <li className="font-bold text-green-400 "> <NavLink to="/hrHome">Home</NavLink></li>
     <li className="font-bold text-green-400"> <NavLink to="/dashboard">All Requests</NavLink> </li> 
     <li className="font-bold text-green-400"> <NavLink to="/dashboard">Asset List</NavLink> </li> 
-    <li className="font-bold text-green-400"> <NavLink to="/dashboard">Add an Asset</NavLink> </li> 
+    <li className="font-bold text-green-400"> <NavLink to="/addAsset">Add an Asset</NavLink> </li> 
     <li className="font-bold text-green-400"> <NavLink to="/dashboard">Add an Employee</NavLink> </li> 
     <li className="font-bold text-green-400"> <NavLink to="/dashboard">My Employee List</NavLink> </li> 
     <li className="font-bold text-green-400"> <NavLink to="/profile">Profile</NavLink> </li> 

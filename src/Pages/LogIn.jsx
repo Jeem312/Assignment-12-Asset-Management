@@ -6,22 +6,26 @@ import { useForm } from "react-hook-form"
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from "../Provider/Provider";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { FaRegCircleUser, FaUser } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import useHr from "../Hooks/useHr";
+import useEmplyee from "../Hooks/useEmplyee";
 
 
 
 const LogIn = () => {
     const {logIn,googleLogin} =useContext(AuthContext);
 
-    
+    const [isHr,isHrLoading] =useHr();
+    const [isEmployee,isEmployeeLoading]=useEmplyee();
 
    
     const navigate = useNavigate();
       const location = useLocation();
     
-    const from = location?.state || "/";
+    const from = isEmployee ? '/employeeHome' : '/hrHome'
+    
   
   
   
@@ -53,14 +57,8 @@ const LogIn = () => {
             socialProvider()
             .then((result) => {
               if (result.user) {
-                Swal.fire({
-                 
-                  icon: "success",
-                  title: "Your work has been saved",
-                  showConfirmButton: false,
-                  timer: 1500
-                });
-                navigate(from,);
+                toast('login successfully')
+                navigate(from);
               }
           })
       
@@ -114,7 +112,7 @@ const LogIn = () => {
           
            
         </div>
-      
+        <Toaster />
     </div></div>
       </div>
     </div>

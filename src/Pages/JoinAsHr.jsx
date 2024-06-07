@@ -68,7 +68,7 @@ const JoinAsHr = () => {
                   Name:result.user.displayName,
                   role:'Hr'
               }
-                toast('LogIn Successfully');
+                toast('Register Successfully');
                 axiosPublic.post('/user',info)
                 .then(res=>{console.log(res.data)})
                 navigate(from);
