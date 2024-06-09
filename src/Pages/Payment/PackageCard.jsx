@@ -6,10 +6,10 @@ const PackageCard = ({p}) => {
     
     return (
         <div>
-           <section className="py-20 dark:bg-gray-100 dark:text-gray-800">
+           <section className="py-20 dark:bg-gray-100 dark:text-gray-800 ">
            <div className="container px-4 mx-auto">
 					
-					<div className="flex flex-wrap items-stretch -mx-4">
+					<div className="flex items-stretch -mx-4">
 						<div className="flex w-full mb-8 sm:px-4 md:w-1/2 lg:w-1/3 lg:mb-0">
 							<div className="flex flex-grow flex-col p-6 space-y-6 rounded shadow sm:p-8 dark:bg-gray-50 bg-green-400 text-white">
 								<div className="space-y-2">
@@ -18,7 +18,7 @@ const PackageCard = ({p}) => {
 
 									</span>
 								</div>
-								<p className="mt-3 leading-relaxed dark:text-gray-600">For Maximum 5 employees</p>
+								<p className="mt-3 leading-relaxed dark:text-gray-600">For Maximum {p.members_count} employees</p>
 								<ul className="flex-1 mb-6 dark:text-gray-600">
 									<li className="flex mb-2 space-x-2">
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="flex-shrink-0 w-6 h-6 dark:text-violet-600">

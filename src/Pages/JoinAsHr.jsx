@@ -13,17 +13,18 @@ import { AuthContext } from "../Provider/Provider";
 
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import PaymentModal from "./Payment/PaymentModal";
+import Swal from "sweetalert2";
 
 
 
 const JoinAsHr = () => {
     const {  createUser,updateUserProfile} =useContext(AuthContext);
     const image_hosting_key = import.meta.env.VITE_IMAGE_API;
-    console.log(image_hosting_key);
+    // console.log(image_hosting_key);
     const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
  const axiosPublic = useAxiosPublic()
     const navigate = useNavigate();
-      const from = '/hrHome';
+      const from = '/package';
     
     
         const {
@@ -32,7 +33,7 @@ const JoinAsHr = () => {
             formState: { errors },
             handleSubmit,} = useForm()
     
-          const onSubmit = (data) => {
+          const onSubmit = async(data) => {
             console.log('data',data)
             const {email,password,Name} = data;
             if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{6,}/.test(password)) {
@@ -40,7 +41,7 @@ const JoinAsHr = () => {
               return;
           }
           const imageFile = { image: data.image[0]};
-          const res =  axiosPublic.post(image_hosting_api,imageFile,{
+          const res =await  axiosPublic.post(image_hosting_api,imageFile,{
               headers: {
                   'Content-Type': 'multipart/form-data'
                 }
@@ -49,13 +50,14 @@ const JoinAsHr = () => {
           
      )
      console.log('api',res.data)
-        //   const info ={
-        //     email: data.email,
-        //     Name:data.Name,
-        //     role:'Hr',
-        //     // image: res.data.data.display_url,
+          const info ={
+            email: data.email,
+            CompanyName:data.CompanyName,
+            Name:data.Name,
+            role:'Hr Manager',
+            Company_logo: res.data.data.display_url,
 
-        // }
+        }
 
             
             createUser(email,password)
@@ -63,11 +65,19 @@ const JoinAsHr = () => {
               // console.log(result.user);
     
               if (result.user) {
-                toast('Register As Hr Manager Successfully');
-                // axiosPublic.post('/user',info)
-                // .then(res=>{console.log(res.data)})
-                // updateUserProfile(Name, image)
-                navigate(from)
+                Swal.fire({
+                  title: 'success',
+                  text: 'Register As Hr Manager Successfully',
+                  icon: 'success',
+                  confirmButtonText: 'Success'
+               
+              })
+            
+                navigate(from);
+                axiosPublic.post('/user',info)
+                .then(res=>{console.log(res.data)})
+                updateUserProfile(Name)
+               
               
               }
 
@@ -124,6 +134,19 @@ const JoinAsHr = () => {
                     {errors.email && <span className='text-red-400'>This field is required</span>}
                  
                 </div>
+                <div className="form-control">
+                  <label className="label text-green-400">
+                    <span className="label-text">Company Name</span>
+                  </label>
+                  <input name='companyName'
+                    type="text"
+                    placeholder="CompanyName"
+                    className="input input-bordered input-success"
+                   
+                    {...register("CompanyName", { required: true })} />
+                    {errors.CompanyName && <span className='text-red-400'>This field is required</span>}
+                 
+                </div>
                 <div className="form-control  ">
                  <label className="label ">
                     <span className="label-text">Company Logo</span>
@@ -149,11 +172,13 @@ const JoinAsHr = () => {
                  
                 </div>
                    
-              
+              <div>
+                <button className="btn btn-block bg-green-400 text-white">Register</button>
+              </div>
                
             
                 <div className="form-control mt-6 p-0">
-                 <PaymentModal value={'Register'}></PaymentModal>
+               
                 </div>
                
                 <label className="label">

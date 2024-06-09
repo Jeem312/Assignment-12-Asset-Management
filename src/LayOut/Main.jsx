@@ -7,7 +7,7 @@ import Footer from "../WithoutLogInDashboard/Footer";
 const Main = () => {
     const navigation = useNavigation();
     return (
-        <div>
+        <div className="">
              <div className='container my-34 mx-auto'>
             <Navbar></Navbar>
            

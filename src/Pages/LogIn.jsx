@@ -24,7 +24,7 @@ const LogIn = () => {
     const navigate = useNavigate();
       const location = useLocation();
     
-    const from = isEmployee ? '/employeeHome' : '/hrHome'
+    const from = isHr && !isHrLoading ? '/hrHome' : '/employeeHome'
     
   
   
@@ -57,7 +57,14 @@ const LogIn = () => {
             socialProvider()
             .then((result) => {
               if (result.user) {
-                toast('login successfully')
+                Swal.fire({
+                  title: 'success',
+                  text: 'LogIn Successfully',
+                  icon: 'success',
+                  confirmButtonText: 'Success'
+               
+              })
+             
                 navigate(from);
               }
           })

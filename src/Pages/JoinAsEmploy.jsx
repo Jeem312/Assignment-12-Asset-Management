@@ -11,6 +11,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "../Provider/Provider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 
 const JoinAsEmploy = () => {
@@ -18,8 +19,11 @@ const JoinAsEmploy = () => {
     const {  createUser,updateUserProfile,googleLogin} =useContext(AuthContext);
         const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
-      const from = "/";
-    
+      const from = "/employeeHome";
+      const image_hosting_key = import.meta.env.VITE_IMAGE_API;
+      // console.log(image_hosting_key);
+      const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+   
     
         const {
             register,
@@ -27,17 +31,29 @@ const JoinAsEmploy = () => {
             formState: { errors },
             handleSubmit,} = useForm()
     
-          const onSubmit = (data) => {
-            
-            const {email,password,Name, image} = data;
+          const onSubmit = async(data) => {
+           
+            const {email,password,Name} = data;
             if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{6,}/.test(password)) {
               toast.error("Password must have at least 1 uppercase letter, 1 lowercase letter, 1 special character, 1 numeric character, and be at least 6 characters long");
               return;
           }
+          const imageFile = { image: data.image[0]};
+          const res =await  axiosPublic.post(image_hosting_api,imageFile,{
+              headers: {
+                  'Content-Type': 'multipart/form-data'
+                }
+             
+          }
+          
+     ) 
+     const Image = res.data.data.display_url;
           const info ={
             email: data.email,
             Name:data.Name,
-            role:'Employee'
+            role:'Employee',
+            companyStatus: 'none',
+            image: res.data.data.display_url,
         }
         
             createUser(email,password)
@@ -45,11 +61,21 @@ const JoinAsEmploy = () => {
               console.log(result.user);
     
               if (result.user) {
-                toast('Register Successfully');
+                Swal.fire({
+                  title: 'success',
+                  text: 'Register As Employee Successfully',
+                  icon: 'success',
+                  confirmButtonText: 'Success'
+               
+              })
+            
                axiosPublic.post('/user',info)
-               .then(res=>{console.log(res.data)})
-                updateUserProfile(Name, image)
+               .then(res=>{console.log(res.data);
+                updateUserProfile(Name, Image)
                 navigate(from)
+
+               })
+               
               
               }
           })
@@ -59,24 +85,7 @@ const JoinAsEmploy = () => {
              
           
           }
-          const handleSocialLogin = (socialProvider) => {
-            socialProvider()
-            .then((result) => {
-              if (result.user) {
-                const info ={
-                  email: result.user.email,
-                  Name:result.user.displayName,
-                  role:'Employee'
-              }
-                toast('LogIn Successfully');
-                axiosPublic.post('/user',info)
-                .then(res=>{console.log(res.data)})
-                toast('LogIn Successfully');
-                navigate(from);
-              }
-          })    
-              
-        }    
+         
     return (
         <div>
            <div>
@@ -144,22 +153,23 @@ const JoinAsEmploy = () => {
                  
                 </div>
                    
-              
+                <div className="form-control  ">
+                 <label className="label ">
+                    <span className="label-text">User Image</span>
+                   
+                  </label>
+                  <input type="file" className="file-input file-input-bordered file-input-success w-full max-w-xs"
+                   {...register("image", { required: true })} />
+                   {errors.image && <span className='text-red-400'>This field is required</span>} 
+                 
+               
+                 </div>
                
             
                 <div className="form-control mt-6 p-0">
                   <button className="border bg-green-400 text-white rounded-lg p-3 ">Register</button>
                 </div>
-                <div className="flex justify-center space-x-4">
-            <button  onClick={() => handleSocialLogin(googleLogin)}
-              aria-label="Log in with Google" className="p-3 rounded-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="w-5 h-5 fill-current text-green-400">
-                    <path d="M16.318 13.714v5.484h9.078c-0.37 2.354-2.745 6.901-9.078 6.901-5.458 0-9.917-4.521-9.917-10.099s4.458-10.099 9.917-10.099c3.109 0 5.193 1.318 6.38 2.464l4.339-4.182c-2.786-2.599-6.396-4.182-10.719-4.182-8.844 0-16 7.151-16 16s7.156 16 16 16c9.234 0 15.365-6.49 15.365-15.635 0-1.052-0.115-1.854-0.255-2.651z"></path>
-                </svg>
-            </button>
-          
-           
-        </div>
+               
                 <label className="label">
                   Have an account?{" "}
                   <Link to="/login" className="label-text-alt link link-hover">

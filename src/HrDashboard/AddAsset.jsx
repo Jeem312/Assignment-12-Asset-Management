@@ -26,7 +26,7 @@ const AddAsset = () => {
         e.preventDefault();
         const from = e.target;
         const date = new Date(startDate).toLocaleDateString();
-        const productName= from.name.vlue;
+        const productName= from.name.value;
         const productQuantity = from.quanity.value;
        const productinfo={
         date,
