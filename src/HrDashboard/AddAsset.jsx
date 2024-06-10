@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/Provider";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 const AddAsset = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [productType,setProductType]=useState('');
@@ -34,6 +35,7 @@ const AddAsset = () => {
         productQuantity,
         productStatus,
         productType,
+       
         HrEmail:user.email,
 
        }
@@ -55,6 +57,10 @@ const AddAsset = () => {
    
     return (
         <div>
+           <div>
+      <Helmet>
+        <title>PrimeFunds || Add An Asset</title>
+      </Helmet></div>
       <form
        onSubmit={handleAddAsset} className=''> <h2 className='flex mt-16 mb-6 justify-center items-center font-bold text-2xl text-green-500'>Add An Asset</h2>
         <div className='container mx-auto w-1/2 gap-4 my-6 '>

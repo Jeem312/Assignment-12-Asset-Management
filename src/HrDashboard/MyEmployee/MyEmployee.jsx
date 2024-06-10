@@ -4,6 +4,7 @@ import { AuthContext } from '../../Provider/Provider';
 import { FaTrash } from 'react-icons/fa';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const MyEmployee = () => {
     const {user}=useContext(AuthContext);
@@ -47,6 +48,10 @@ const MyEmployee = () => {
     }
     return (
         <section className="py-6 dark:bg-gray-100 dark:text-gray-800 my-24">
+             <div>
+      <Helmet>
+        <title>PrimeFunds || My Employee List</title>
+      </Helmet></div>
         <div className="container flex flex-col items-center justify-center p-4 mx-auto space-y-8 sm:p-10">
             <h1 className="text-4xl font-bold leading-none text-center sm:text-5xl text-green-400">My team</h1>
            
@@ -55,7 +60,7 @@ const MyEmployee = () => {
                 myTeam.map(member=> <div key={member._id} className="flex flex-col justify-center m-8 text-center">
                 <img src={member?.image}  className='self-center flex-shrink-0 w-24 h-24 mb-4 bg-center bg-cover rounded-full dark:bg-gray-500' />
                 <p className="text-xl font-semibold leading-tight">{member?.Name}</p>
-                <p className=" font-semibold leading-tight">Normal Employee</p>
+                <p className=" font-semibold leading-tight">{member.role}</p>
                 <div className='flex justify-center items-center my-3 border border-red-300 rounded-lg p-2'>
                     <button onClick={()=> handleRemove(member.Hr_email,member.companyStatus,member.email)} className=' text-red-400 flex'>Remove<FaTrash className='mt-1'></FaTrash></button>
                 </div>

@@ -19,6 +19,7 @@ import AddAnEmployee from "../HrDashboard/AddAnnEmployee/AddAnEmployee.jsx";
 import AllRequest from "../HrDashboard/AllRequest/AllRequest.jsx";
 import AssetList from "../HrDashboard/AssetList/AssetList.jsx";
 import MyEmployee from "../HrDashboard/MyEmployee/MyEmployee.jsx";
+import AssetUpdate from "../HrDashboard/AssetList/AssetUpdate.jsx";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -43,10 +44,7 @@ const router = createBrowserRouter([
         },
 
         // employee routes
-        {
-            path:'/employeeHome',
-            element: <EmployeeHome></EmployeeHome>
-        },
+       
         {
             path:'/myAsset',
             element: <MyAsset></MyAsset>
@@ -65,10 +63,7 @@ const router = createBrowserRouter([
         },
 
         // hr routes
-        {
-            path:'/hrHome',
-            element: <HrRoute><HrHome></HrHome></HrRoute>,
-        },
+       
         {
             path:'/addAsset',
             element: <HrRoute><AddAsset></AddAsset></HrRoute>,
@@ -80,6 +75,10 @@ const router = createBrowserRouter([
         {
             path:'/allRequest',
             element: <HrRoute><AllRequest></AllRequest></HrRoute>,
+        },
+        {
+            path:'/updateAsset/:id',
+            element: <HrRoute><AssetUpdate></AssetUpdate></HrRoute>,
         },
         {
             path:'/assetList',

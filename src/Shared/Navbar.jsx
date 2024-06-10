@@ -39,9 +39,9 @@ const [users]=useUser();
    
    }
    {
-    user && isEmployee &&
+    isEmployee &&
      <div className='flex'>
-     <li className="font-bold text-green-400 "> <NavLink to="/employeeHome">Home</NavLink></li>
+     <li className="font-bold text-green-400 "> <NavLink to="/">Home</NavLink></li>
     <li className="font-bold text-green-400"> <NavLink to="/myAsset">My Assets</NavLink> </li> 
     <li className="font-bold text-green-400"> <NavLink to="/myteam">My Team</NavLink> </li> 
     <li className="font-bold text-green-400"> <NavLink to="/requestForAsset">Request for an Asset</NavLink> </li> 
@@ -50,9 +50,9 @@ const [users]=useUser();
    
    }
    {
-    user && isHr &&
+     isHr &&
      <div className='flex'>
-       <li className="font-bold text-green-400 "> <NavLink to="/hrHome">Home</NavLink></li>
+       <li className="font-bold text-green-400 "> <NavLink to="/">Home</NavLink></li>
     <li className="font-bold text-green-400"> <NavLink to="/allRequest">All Requests</NavLink> </li> 
     <li className="font-bold text-green-400"> <NavLink to="/assetList">Asset List</NavLink> </li> 
     <li className="font-bold text-green-400"> <NavLink to="/addAsset">Add an Asset</NavLink> </li> 

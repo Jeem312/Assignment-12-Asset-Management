@@ -6,6 +6,7 @@ import { FaUser } from 'react-icons/fa';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const AddAnEmployee = () => {
     const { user } = useContext(AuthContext);
@@ -74,27 +75,30 @@ const AddAnEmployee = () => {
         const updateInfo = {
             Hr_email: user?.email,
             companyStatus: 'Yes',
-            Company_logo: hrinfo?.Company_logo
+            Company_logo: hrinfo?.Company_logo,
+          
         };
 
         axiosSecure.patch(`/users/${email}`, updateInfo)
             .then(res => {
-                console.log('Individual update response:', res.data);
+                // console.log('Individual update response:', res.data);
                 Swal.fire({
                     title: 'Success',
                     text: 'Added Employee Successfully',
                     icon: 'success',
                     confirmButtonText: 'Success'
                 });
-                refetch().then(() => {
-                    console.log('Refetch completed');
-                });
+                refetch();
             })
            
     };
 
     return (
         <div>
+             <div>
+      <Helmet>
+        <title>PrimeFunds || Add An Employee</title>
+      </Helmet></div>
             <div className="divider"></div>
             <div className='container mx-auto flex flex-col justify-center items-center'>
                 <h1 className='text-xl text-green-400 justify-center items-center'>Your Employee Limit: {hrinfo?.members_count}</h1>

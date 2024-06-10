@@ -24,7 +24,7 @@ const LogIn = () => {
     const navigate = useNavigate();
       const location = useLocation();
     
-    const from = isHr && !isHrLoading ? '/hrHome' : '/employeeHome'
+    const from = '/';
     
   
   
