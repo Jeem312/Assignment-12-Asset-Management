@@ -1,24 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PendingRequest from './PendingRequest';
 import LimitedStock from './LimitedStock';
 import TopMostReq from './TopMostReq';
-import Piechart from './Piechart';
+import AddNotice from './AddNotice';
+
+
 
 const HrHome = () => {
+   
     return (
-        <div className='container'>
+        <div className='container mx-auto my-24'>
+        
             <div>
               <PendingRequest></PendingRequest>
             </div>
             <div>
                 <TopMostReq></TopMostReq>
             </div>
-           <div>
+           <div className=''>
             <LimitedStock></LimitedStock>
            </div>
-     <div>
-        <Piechart></Piechart>
-     </div>
+           <div>
+            <AddNotice></AddNotice>
+           </div>
+    
         </div>
     );
 };

@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import useAssets from '../../Hooks/useAssets';
 import Piechart from './Piechart';
+import { AuthContext } from '../../Provider/Provider';
 
 const LimitedStock = () => {
     const [assets] =useAssets();
-    const limitedStock = assets.filter(item=> parseInt(item.productQuantity) < 10 );
+    
+    const  {user} = useContext(AuthContext);
+    
+    const myAssets = assets.filter(item=>item.HrEmail===user?.email);
+    const limitedStock = myAssets.filter(item=> parseInt(item.productQuantity) < 10 );
     
     return (
-        <div className='flex my-10'>
-            <div className="overflow-x-auto">
+        <div className='flex flex-col md:flex-row my-10'>
+            <div className="overflow-x-auto flex-1">
             <div className="divider"></div>
-                <h1 className='text-2xl text-gray-600  flex justify-center items-center my-4'>------Limited Stocks-----</h1>
+                <h1 className='text-2xl text-yellow-400  flex justify-center items-center my-4'>------Limited Stocks-----</h1>
                 <div className="divider "></div>
 
                <table className="table">
@@ -40,8 +45,14 @@ const LimitedStock = () => {
     </tbody>
   </table> 
         </div>
-        <div>
-            <Piechart></Piechart>
+        <div className='flex-1 md:px-36 '>
+        <div className="overflow-x-auto flex-1">
+            <div className="divider"></div>
+                <h1 className='text-2xl text-yellow-400  flex justify-center items-center my-4'>------Asset Returnability Overview-----</h1>
+                <div className="divider "></div></div>
+           <div className='container mx-auto flex justify-center items-center'>
+           <Piechart ></Piechart>
+           </div>
         </div>
         </div>
     );
