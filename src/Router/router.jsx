@@ -5,8 +5,7 @@ import Home from '../WithoutLogInDashboard/Home.jsx'
 import JoinAsEmploy from "../Pages/JoinAsEmploy.jsx";
 import JoinAsHr from "../Pages/JoinAsHr.jsx";
 import LogIn from "../Pages/LogIn.jsx";
-import EmployeeHome from "../EmployeeDashboard/EmployeeHome.jsx";
-import HrHome from "../HrDashboard/HrHome/HrHome.jsx";
+
 import AddAsset from '../HrDashboard/AddAsset.jsx'
 import Payment from "../Pages/Payment/Payment.jsx";
 import PaymentModal from "../Pages/Payment/PaymentModal.jsx";
