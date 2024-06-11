@@ -5,6 +5,7 @@ import { AuthContext } from '../../Provider/Provider';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import useUser from '../../Hooks/useUser';
+import { update } from 'firebase/database';
 
 const RequestForAsset = () => {
     const [assets,refetch] = useAssets();
@@ -98,6 +99,12 @@ const RequestForAsset = () => {
                 refetch();
             }
            })
+             const count = parseInt(selectedAsset.requestedCount) + 1;
+             const update = {
+                count: count
+              }
+           axiosSecure.patch(`/count/${selectedAsset._id}`,update)
+           .then(res=>console.log(res.data))
            
            
     };
@@ -134,7 +141,7 @@ const RequestForAsset = () => {
                     >
                         <option value=''>Filter By Asset Type</option>
                         <option value='returnable'>Returnable</option>
-                        <option value='non-returnable'>Non-Returnable</option>
+                        <option value='non-returnable'>NonReturnable</option>
                     </select>
                     <select
                         onChange={e => setSortOrder(e.target.value)}

@@ -26,6 +26,7 @@ const AddAsset = () => {
     const handleAddAsset= (e)=>{
         e.preventDefault();
         const from = e.target;
+        const count = parseInt(0);
         const date = new Date(startDate).toLocaleDateString();
         const productName= from.name.value;
         const productQuantity = from.quanity.value;
@@ -35,6 +36,7 @@ const AddAsset = () => {
         productQuantity,
         productStatus,
         productType,
+        requestedCount: count,
        
         HrEmail:user.email,
 

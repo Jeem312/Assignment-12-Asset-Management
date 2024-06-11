@@ -15,12 +15,15 @@ const MyAsset = () => {
     const [requestedAssets, refetch] = useRequestAssets();
     const axiosSecure = useAxiosSecure();
     const [assets] = useAssets();
-    const [selectedAsset, setSelectedAsset] = useState(null);  
-
+    
+    const [selectedAsset, setSelectedAsset] = useState(null);
+    const [stockFilter, setStockFilter] = useState('');
+    const [typeFilter, setTypeFilter] = useState('');
+    const [searchQuery, setSearchQuery] = useState('');
     const myInfo = users?.filter(p => p.email === user?.email);
     const myHr = users?.find(u => u.email === myInfo[0]?.Hr_email);
     const myAssets = requestedAssets.filter(a => a.requesterEmail === user?.email);
-    // console.log(myHr);
+    console.log(myAssets);
 
     const handleReturn = (id, requestedAssetId) => {
         const status = {
@@ -51,11 +54,68 @@ const MyAsset = () => {
             .then(res => console.log(res.data));
     };
 
+    const filteredAssets = myAssets.filter(asset => {
+        return (
+            (stockFilter === '' || (stockFilter === 'approved' ? asset.status === 'approved' : asset.status === 'pending')) && 
+            (typeFilter === '' || asset.assetType.toLowerCase() === typeFilter) &&
+            (searchQuery === '' || asset.assetName.toLowerCase().includes(searchQuery.toLowerCase()))
+        );
+    });
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        setSearchQuery(e.target.search.value);
+    };
+console.log(filteredAssets)
     return (
         <div>
             <Helmet>
                 <title>PrimeFunds || My Asset</title>
             </Helmet>
+
+            <div className='mb-6 flex justify-between'>
+                <div className='flex flex-col md:flex-row gap-4'>
+                   
+                    <select
+                        onChange={e => setStockFilter(e.target.value)}
+                        value={stockFilter}
+                        name='stock'
+                        id='stock'
+                        className='border p-4 rounded-lg  text-green-400'
+                    >
+                        <option value=''>Filter By Requested Status</option>
+                        <option value='approved'>approved</option>
+                       
+                        <option value='pending'>pending</option>
+                    </select>
+                    <select
+                        onChange={e => setTypeFilter(e.target.value)}
+                        value={typeFilter}
+                        name='assetType'
+                        id='assetType'
+                        className='border p-4 rounded-lg text-green-400'
+                    >
+                        <option value=''>Filter By Asset Type</option>
+                        <option value='returnable'>Returnable</option>
+                        <option value='non-returnable'>NonReturnable</option>
+                    </select>
+                   
+                </div>
+                <form onSubmit={handleSearch} className='mt-4'>
+                    <div className='flex overflow-hidden border rounded-lg focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300'>
+                        <input
+                            className='px-6 py-2 text-gray-700 placeholder-gray-500 bg-white outline-none focus:placeholder-transparent'
+                            type='text'
+                            name='search'
+                            placeholder='Enter Asset Name'
+                            aria-label='Enter Asset Name'
+                        />
+                        <button className='px-1 md:px-3 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform rounded-lg hover:bg-gray-600 focus:bg-gray-600 focus:outline-none bg-green-500'>
+                            Search
+                        </button>
+                    </div>
+                </form>
+            </div>
             {
                 !myHr || myHr.length === 0 ? 
                 <div>
@@ -78,7 +138,7 @@ const MyAsset = () => {
                         </thead>
                         <tbody>
                             {
-                                myAssets?.map((asset, index) => (
+                                filteredAssets?.map((asset, index) => (
                                     <tr key={asset._id}>
                                         <th>{index + 1}</th>
                                         <td>{asset?.assetName}</td>

@@ -8,6 +8,9 @@ import Package from './Package/Package';
 import useEmplyee from '../Hooks/useEmplyee';
 import useHr from '../Hooks/useHr';
 import { AuthContext } from '../Provider/Provider';
+import HrHome from '../HrDashboard/HrHome/HrHome';
+
+import HomeEmploye from '../EmployeeDashboard/EmployeeHome/HomeEmploye';
 
 
 
@@ -35,12 +38,12 @@ const Home = () => {
     }
          {
           isHr && <div>
-            
+            <HrHome></HrHome>
           </div>
          }
          {
           isEmployee && <div>
-
+              <HomeEmploye></HomeEmploye>
           </div>
          }
       </div>
