@@ -7,9 +7,9 @@ const PendingRequest = () => {
     const [requstedAssets,refetch] = useRequestAssets();
     const  {user} = useContext(AuthContext);
     
-    const myAssets = requstedAssets.filter(item=>item.HrEmail===user?.email);
+    const myAssets = requstedAssets.filter(item=>item.assetHrEmail=== user?.email);
     console.log(myAssets);
-   const pendingData = requstedAssets.filter(p=>p.status==='pending');
+   const pendingData = myAssets.filter(p=>p.status==='pending');
    console.log(pendingData);
     return (
         <div className='my-24'>

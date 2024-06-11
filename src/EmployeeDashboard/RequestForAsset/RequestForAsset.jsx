@@ -11,12 +11,12 @@ const RequestForAsset = () => {
     const [assets,refetch] = useAssets();
     const [users]=useUser();
     const {user} = useContext(AuthContext);
-    const myInfo = users?.filter(p=>p.email === user.email);
+    const myInfo = users?.filter(p=>p.email === user?.email);
     // console.log(myInfo);
-    const myHr = users?.filter(u=>u.email === myInfo[0].Hr_email);
+    const myHr = users?.filter(u=>u.email === myInfo[0]?.Hr_email);
     // console.log(myHr);
     
-    const myAssets = assets.filter(a=>a.HrEmail===myHr[0].email);
+    const myAssets = assets?.filter(a=>a.HrEmail===myHr[0]?.email);
     console.log(myAssets);
     const [selectedAsset, setSelectedAsset] = useState(null);
     const [note, setNote] = useState('');
@@ -34,7 +34,7 @@ const RequestForAsset = () => {
 
     const myAsset = assets
     .filter(asset => 
-        asset.HrEmail === myHr[0].email &&
+        asset.HrEmail === myHr[0]?.email &&
        
         (stockFilter === '' || (stockFilter === 'instock' ? asset.productStatus === 'In Stock' : asset.productStatus === 'Out of Stock')) &&
         (typeFilter === '' || asset.productType.toLowerCase() === typeFilter) &&
