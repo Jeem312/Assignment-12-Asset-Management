@@ -19,7 +19,7 @@ const JoinAsEmploy = () => {
     const {  createUser,updateUserProfile,googleLogin} =useContext(AuthContext);
         const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
-      const from = "/employeeHome";
+   
       const image_hosting_key = import.meta.env.VITE_IMAGE_API;
       // console.log(image_hosting_key);
       const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -72,7 +72,7 @@ const JoinAsEmploy = () => {
                axiosPublic.post('/user',info)
                .then(res=>{console.log(res.data);
                 updateUserProfile(Name, Image)
-                navigate(from)
+                navigate('/');
 
                })
                

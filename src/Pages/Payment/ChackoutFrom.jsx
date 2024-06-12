@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../Provider/Provider";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 
 const ChackoutFrom = ({ id }) => {
@@ -25,20 +26,20 @@ const ChackoutFrom = ({ id }) => {
     }
   })
   const paymentPackage = packages.find(p => p._id === id);
-  console.log(paymentPackage)
-  const amount = paymentPackage?.price;
-  console.log(amount);
+  // console.log(paymentPackage)
+  const amount =paymentPackage?.price;
+  // console.log(amount);
   useEffect(() => {
     if (amount) {
       if (amount > 0) {
-        axiosSecure.post('/create-payment-intend', {price:amount})
+        axios.post('https://assignment-12-server-flame-seven.vercel.app/create-payment-intend', {price:amount})
           .then(res => {
-            console.log(res.data);
+            console.log(res.data.clientSecret);
             setClientSecret(res.data.clientSecret)
           })
       }
     }
-  }, [axiosSecure, amount])
+  }, [amount])
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -104,7 +105,7 @@ const ChackoutFrom = ({ id }) => {
     axiosSecure.post('/payments',payment)
     .then(res=>{
       console.log('payment saved',res.data)
-     navigate('/hrHome')
+     navigate('/')
       
     })
       
@@ -131,7 +132,7 @@ const ChackoutFrom = ({ id }) => {
           }}
         />
         <button className="btn btn-sm bg-green-400 text-white my-6 " type="submit" 
-        disabled={!stripe || !clientSecret}
+        // disabled={!stripe || !clientSecret}
         >
           Pay
         </button>

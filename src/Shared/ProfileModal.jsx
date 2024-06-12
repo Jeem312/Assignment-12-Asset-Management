@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { AuthContext } from "../Provider/Provider";
 import Swal from "sweetalert2";
 import toast, { Toaster } from "react-hot-toast";
+import useUser from "../Hooks/useUser";
 
 
 const ProfileModal = () => {
@@ -16,6 +17,7 @@ const ProfileModal = () => {
     const axiosPublic = useAxiosPublic()
     
  const{user} =useContext(AuthContext);
+  const [users,refetch]=useUser();
 
     const {
         register,
@@ -42,6 +44,7 @@ const ProfileModal = () => {
           }
          axiosPublic.patch(`/updateProfile/${user?.email}`,updatedInfo)
          .then(res=>{
+          refetch();
           console.log(res.data)
           if(res.data.modifiedCount>0){
             Swal.fire({
@@ -50,8 +53,10 @@ const ProfileModal = () => {
                 icon: 'success',
                 confirmButtonText: 'Success'
               
+              
             })
             }
+          
          })
             
  } 

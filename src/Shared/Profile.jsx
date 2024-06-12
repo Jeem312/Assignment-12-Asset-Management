@@ -7,7 +7,7 @@ import ProfileModal from "./ProfileModal";
 
 const Profile = () => {
     const {user} = useContext(AuthContext);
-const [users]=useUser();
+const [users,refetch]=useUser();
    const person = users.find(p=> p.email === user?.email);
 //    console.log(person.Company_logo)
 
@@ -30,7 +30,7 @@ const [users]=useUser();
                 <p className="px-5 text-xs sm:text-base dark:text-gray-600">{person?.role}</p>
             </div>
             <div className=" my-4">
-               <ProfileModal></ProfileModal>
+               <ProfileModal ></ProfileModal>
             </div>
     
           </div>
