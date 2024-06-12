@@ -26,18 +26,18 @@ const ProfileModal = () => {
             const {name}=data;
             
           
-            const imageFile = { image: data.image[0]};
-            const res =await  axiosPublic.post(image_hosting_api,imageFile,{
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                  }
+      //       const imageFile = { image: data.image[0]};
+      //       const res =await  axiosPublic.post(image_hosting_api,imageFile,{
+      //           headers: {
+      //               'Content-Type': 'multipart/form-data'
+      //             }
                
-            }    
+      //       }    
             
-       )   
+      //  )   
           const updatedInfo = {
             name:name,
-            Company_logo:res.data.data.display_url,
+            // Company_logo:res.data.data.display_url,
 
           }
          axiosPublic.patch(`/updateProfile/${user?.email}`,updatedInfo)
@@ -58,9 +58,9 @@ const ProfileModal = () => {
     <form  onSubmit={handleSubmit(onSubmit)}>
     <div className="my-2">
     <input type="text" name="name" placeholder="Name" className="input input-bordered input-success w-full max-w-xs my-4" required  {...register("name", { required: true })} />
-                   {errors.Email && <span className='text-red-400'>This field is required</span>}
-    <input type="file" name="image" className="file-input file-input-bordered file-input-success w-full max-w-xs"   {...register("image", { required: true })} />
-                   {errors.password && <span className='text-red-400'>This field is required</span>}
+                   {errors.name && <span className='text-red-400'>This field is required</span>}
+    {/* <input type="file" name="image" className="file-input file-input-bordered file-input-success w-full max-w-xs"   {...register("image", { required: true })} />
+                   {errors.password && <span className='text-red-400'>This field is required</span>} */}
     </div>
    <div className="">
   <button className="btn-sm rounded-lg bg-green-400 text-white ">Update</button>
