@@ -57,7 +57,7 @@ const MyAsset = () => {
     const filteredAssets = myAssets.filter(asset => {
         return (
             (stockFilter === '' || (stockFilter === 'approved' ? asset.status === 'approved' : asset.status === 'pending')) && 
-            (typeFilter === '' || (typeFilter === 'NonReturnable' ? asset.productType === 'NonReturnable' : asset.productType === 'ReturnAble')) &&
+            (typeFilter === '' || (typeFilter === 'NonReturnable' ? asset.assetType === 'NonReturnable' : asset.assetType === 'ReturnAble')) &&
             (searchQuery === '' || asset.assetName.toLowerCase().includes(searchQuery.toLowerCase()))
         );
     });
@@ -134,6 +134,7 @@ console.log(filteredAssets)
                                 <th>Cancel</th>
                                 <th>Print</th>
                                 <th>Return</th>
+                                <th>PDF Perview</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -181,18 +182,19 @@ console.log(filteredAssets)
                                                 </button>
                                             }
                                         </td>
-                                    </tr>
-                                ))
-                            }
-                        </tbody>
-                    </table>
-                    {selectedAsset && 
+                                        {selectedAsset && 
                         <div className="pdf-viewer-container">
                             <PDFViewer width="600" height="400">
                                 <PDFFile asset={selectedAsset} />
                             </PDFViewer>
                         </div>
                     }
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                   
                 </div>
             }
         </div>
