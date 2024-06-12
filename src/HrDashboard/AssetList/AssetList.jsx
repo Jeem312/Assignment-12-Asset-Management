@@ -22,7 +22,7 @@ const AssetList = () => {
             asset.HrEmail === user?.email &&
            
             (stockFilter === '' || (stockFilter === 'instock' ? asset.productStatus === 'In Stock' : asset.productStatus === 'Out of Stock')) &&
-            (typeFilter === '' || (typeFilter === 'NonReturnable' ? asset.productStatus === 'NonReturnable' : asset.productStatus === 'Returnable')) &&
+            (typeFilter === '' || (typeFilter === 'NonReturnable' ? asset.productType === 'NonReturnable' : asset.productType === 'Returnable')) &&
             (search === '' || asset.productName.toLowerCase().includes(search.toLowerCase()))
         )
         .sort((a, b) => {
