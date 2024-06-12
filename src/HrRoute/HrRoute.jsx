@@ -11,7 +11,7 @@ const HrRoute = ({children}) => {
    const isPaid = payments?.find(p=>p.email===user?.email);
 //    console.log(isPaid)
    if (isPending && loading){
-   <div><span className="loading loading-dots loading-md"></span></div>
+  return  <div><span className="loading loading-dots loading-md"></span></div>
      }
    if(isPaid){
     return children

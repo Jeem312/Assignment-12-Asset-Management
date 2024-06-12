@@ -43,6 +43,15 @@ const ProfileModal = () => {
          axiosPublic.patch(`/updateProfile/${user?.email}`,updatedInfo)
          .then(res=>{
           console.log(res.data)
+          if(res.data.modifiedCount>0){
+            Swal.fire({
+                title: 'success',
+                text: 'Your Profile Updated Successfully',
+                icon: 'success',
+                confirmButtonText: 'Success'
+              
+            })
+            }
          })
             
  } 

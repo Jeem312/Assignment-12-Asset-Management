@@ -5,7 +5,7 @@
 - **Password:** asdfghjkL@1
 
 ## Live Site URL
-[Visit the Live Site](https://www.assetmanagementsystem.com)
+[Visit the Live Site](https://assignment-12-f1692.web.app)
 
 ## Features of the Website
 

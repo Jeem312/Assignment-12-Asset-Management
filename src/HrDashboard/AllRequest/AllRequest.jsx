@@ -108,8 +108,8 @@ const AllRequest = () => {
               className='px-6 py-2 text-gray-700 placeholder-gray-500 bg-white outline-none focus:placeholder-transparent'
               type='text'
               name='search'
-              placeholder='Enter Asset Name'
-              aria-label='Enter Asset Name'
+              placeholder='Enter Requester Name'
+              aria-label='Enter Requester Name'
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
