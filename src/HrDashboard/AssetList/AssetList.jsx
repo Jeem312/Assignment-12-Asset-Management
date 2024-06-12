@@ -22,7 +22,7 @@ const AssetList = () => {
             asset.HrEmail === user?.email &&
            
             (stockFilter === '' || (stockFilter === 'instock' ? asset.productStatus === 'In Stock' : asset.productStatus === 'Out of Stock')) &&
-            (typeFilter === '' || asset.productType.toLowerCase() === typeFilter) &&
+            (typeFilter === '' || (typeFilter === 'NonReturnable' ? asset.productStatus === 'NonReturnable' : asset.productStatus === 'Returnable')) &&
             (search === '' || asset.productName.toLowerCase().includes(search.toLowerCase()))
         )
         .sort((a, b) => {
@@ -92,8 +92,8 @@ const AssetList = () => {
                         className='border p-4 rounded-lg text-gray-700'
                     >
                         <option value=''>Filter By Asset Type</option>
-                        <option value='returnable'>Returnable</option>
-                        <option value='non-returnable'>Non-Returnable</option>
+                        <option value='Returnable'>Returnable</option>
+                        <option value='NonReturnable'>NonReturnable</option>
                     </select>
                     <select
                         onChange={e => setSortOrder(e.target.value)}
