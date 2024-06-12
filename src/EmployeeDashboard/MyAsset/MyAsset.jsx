@@ -57,7 +57,7 @@ const MyAsset = () => {
     const filteredAssets = myAssets.filter(asset => {
         return (
             (stockFilter === '' || (stockFilter === 'approved' ? asset.status === 'approved' : asset.status === 'pending')) && 
-            (typeFilter === '' || asset.assetType.toLowerCase() === typeFilter) &&
+            (typeFilter === '' || (typeFilter === 'NonReturnable' ? asset.productType === 'NonReturnable' : asset.productType === 'ReturnAble')) &&
             (searchQuery === '' || asset.assetName.toLowerCase().includes(searchQuery.toLowerCase()))
         );
     });
@@ -96,8 +96,8 @@ console.log(filteredAssets)
                         className='border p-4 rounded-lg text-green-400'
                     >
                         <option value=''>Filter By Asset Type</option>
-                        <option value='returnable'>Returnable</option>
-                        <option value='non-returnable'>NonReturnable</option>
+                        <option value='ReturnAble'>Returnable</option>
+                        <option value='NonReturnable'>NonReturnable</option>
                     </select>
                    
                 </div>
