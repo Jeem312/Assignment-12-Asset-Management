@@ -4,6 +4,9 @@
 - **Username:** shanjidajeem312@gmail.com
 - **Password:** asdfghjkL@1
 
+# Project Overview
+This project is a financial management platform designed to help users manage their investments and track financial growth. It offers tools and resources for making informed financial decisions.
+
 ## Live Site URL
 [Visit the Live Site](https://assignment-12-f1692.web.app)
 
@@ -57,4 +60,11 @@
     - Intuitive and easy-to-navigate interface for both HR managers and employees.
     - Comprehensive help and support documentation.
 
-
+# Technologies Used
+- **React**
+- **Firebase**
+- **Tailwind CSS**
+#Getting Started
+1. Clone the repository:Clone the repository to explore and analyze the full code. You have to replace your own credintial on .env.local
+   
+   git clone https://github.com/Jeem312/Assignment-11-Thought_canvas.git
