@@ -67,4 +67,4 @@ This project is a financial management platform designed to help users manage th
 #Getting Started
 1. Clone the repository:Clone the repository to explore and analyze the full code. You have to replace your own credintial on .env.local
    
-   git clone https://github.com/Jeem312/Assignment-11-Thought_canvas.git
+   git clone https://github.com/Jeem312/Assignment-12-Asset-Management.git
