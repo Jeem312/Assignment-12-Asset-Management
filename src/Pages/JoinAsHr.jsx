@@ -115,7 +115,7 @@ const JoinAsHr = () => {
                   <input name='name'
                     type="text"
                     placeholder="Full name"
-                    className="input input-bordered input-success"
+                    className="input input-bordered input-success dark:text-white"
                    
                     {...register("Name", { required: true })} />
                     {errors.Name && <span className='text-red-400'>This field is required</span>}
@@ -128,7 +128,7 @@ const JoinAsHr = () => {
                   <input name='email'
                     type="text"
                     placeholder="email"
-                    className="input input-bordered input-success"
+                    className="input input-bordered input-success dark:text-white"
                    
                     {...register("email", { required: true })} />
                     {errors.email && <span className='text-red-400'>This field is required</span>}
@@ -141,7 +141,7 @@ const JoinAsHr = () => {
                   <input name='companyName'
                     type="text"
                     placeholder="CompanyName"
-                    className="input input-bordered input-success"
+                    className="input input-bordered input-success dark:text-white"
                    
                     {...register("CompanyName", { required: true })} />
                     {errors.CompanyName && <span className='text-red-400'>This field is required</span>}
@@ -165,7 +165,7 @@ const JoinAsHr = () => {
                   <input name='password'
                     type="password"
                     placeholder="password"
-                    className="input input-bordered input-success w-full"
+                    className="input input-bordered input-success w-full dark:text-white"
                    
                     {...register("password", { required: true })} />
                     {errors.password && <span className='text-red-400'>This field is required</span>}
@@ -173,7 +173,7 @@ const JoinAsHr = () => {
                 </div>
                    
               <div>
-                <button className="btn btn-block bg-green-400 text-white">Register</button>
+                <button className="btn btn-block bg-green-400  text-white">Register</button>
               </div>
                
             

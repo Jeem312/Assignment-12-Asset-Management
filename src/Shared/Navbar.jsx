@@ -14,7 +14,7 @@ const Navbar = () => {
   console.log(user)
    const [isHr,isHrLoading] =useHr();
    const [isEmployee,isEmployeeLoading]=useEmplyee();
-   
+   console.log(isEmployee);
 const [users]=useUser();
    const person = users.find(p=> p.email === user?.email);
    const handleLogOut = ()=>{
@@ -114,15 +114,15 @@ const [users]=useUser();
                      
                     </a>
                   </li>
+                  <li>
+                  <button
+                             onClick={handleLogOut}
+                                className=" btn-sm   ">Logout</button>
+                  </li>
   
                 </ul>
                 </div>
-                <div className='mt-2 bg-green-400 text-white btn '>
-                             <button
-                             onClick={handleLogOut}
-                                className=" btn-sm   ">Logout</button>
-
-                </div>
+               
               </div> :
                 <div>
                

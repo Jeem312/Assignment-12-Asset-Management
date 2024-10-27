@@ -15,7 +15,7 @@ const Piechart = () => {
         { name: 'Non-Returnable', value: nonReturnableLength }
     ];
 
-    const COLORS = ['#0088FE', '#FF8042'];
+    const COLORS = ['#FFBB28', '#FF8042'];
     return (
         <PieChart width={400} height={400}>
             <Pie

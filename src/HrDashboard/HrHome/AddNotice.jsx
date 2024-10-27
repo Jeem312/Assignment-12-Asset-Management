@@ -12,7 +12,7 @@ const AddNotice = () => {
     
    const mynotice = notice.filter(item=> item.Hr_email==user?.email)
    .sort((a,b)=>new Date(b.date)-new Date(a.date));
-   console.log(mynotice)
+//    console.log(mynotice)
    
     const handleNotice = (e)=>{
  e.preventDefault();
@@ -55,19 +55,27 @@ const AddNotice = () => {
          <div>
             <div className='my-10'>
                 <h2 className='text-2xl flex justify-center items-center'>Your Notice</h2>
-             {
-                mynotice.map((n,index)=> <div className='my-4' key={n._id}>
-                    <p  className='text-red-500' key={n._id}><span className='text-green-500 font-bold'>{index+1}.Notice:</span>{n.notice}</p>
-                    <p className=''><span className='font-bold'>Published Date:</span>{n.date}</p>
-                </div>
-
-                )
-             }
+                {mynotice.map((n, index) => (
+              <div className="my-6 p-4 border-b border-gray-300" key={n._id}>
+                <h3 className="text-lg font-semibold text-green-400 mb-2 flex justify-center items-center underline">
+                  Notice: {index + 1}.
+                </h3>
+                <p className="text-gray-800 text-base mb-2">
+                  Dear Employee,
+                </p>
+                <p className="text-gray-800 text-base mb-2">
+                  {n.notice}
+                </p>
+                <p className="text-sm text-gray-500">
+                  <span className="font-bold">Published Date :</span> {n.date} 
+                </p>
+              </div>
+            ))}
                 </div> 
             <div className='flex flex-col justify-center items-center'>
            <form onSubmit={handleNotice} >
 
-           <textarea name='notice' placeholder="Bio" className="textarea textarea-bordered textarea-md w-full max-w-xs" ></textarea>
+           <textarea name='notice' placeholder="Notice" className="textarea textarea-bordered textarea-md w-full max-w-xs" ></textarea>
            <div>
             <button className='btn btn-wide bg-green-400 text-white'>Add Notice</button>
            </div>

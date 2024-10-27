@@ -113,7 +113,7 @@ const JoinAsEmploy = () => {
                   <input name='name'
                     type="text"
                     placeholder="Full name"
-                    className="input input-bordered"
+                    className="input input-bordered dark:text-white"
                    
                     {...register("Name", { required: true })} />
                     {errors.Name && <span className='text-red-400'>This field is required</span>}
@@ -126,7 +126,7 @@ const JoinAsEmploy = () => {
                   <input name='email'
                     type="text"
                     placeholder="email"
-                    className="input input-bordered"
+                    className="input input-bordered dark:text-white"
                    
                     {...register("email", { required: true })} />
                     {errors.email && <span className='text-red-400'>This field is required</span>}
@@ -137,7 +137,7 @@ const JoinAsEmploy = () => {
                     <span className="label-text">Date Of Birth</span>
                   </label>
                 
-                 <DatePicker  className="border rounded-lg p-3 w-full" selected={startDate} onChange={(date) => setStartDate(date)} />
+                 <DatePicker  className="border rounded-lg p-3 w-full " selected={startDate} onChange={(date) => setStartDate(date)} />
                  </div>
                  <div className="form-contro">
                   <label className="label ">
@@ -146,7 +146,7 @@ const JoinAsEmploy = () => {
                   <input name='password'
                     type="password"
                     placeholder="password"
-                    className="input input-bordered w-full"
+                    className="input input-bordered w-full dark:text-white"
                    
                     {...register("password", { required: true })} />
                     {errors.password && <span className='text-red-400'>This field is required</span>}
